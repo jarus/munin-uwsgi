@@ -1,0 +1,26 @@
+#!/bin/bash
+# Copyright (c) 2011 Christoph Heer (Christoph.Heer@googlemail.com)
+# License: BSD, see LICENSE for more details.
+
+mode=`echo $0 | cut -d _ -f 2`
+
+if [ "$1" = "suggest" ]; then
+	echo "memory"
+	exit 0
+fi
+
+if [ "$mode" = "memory" ]; then
+	if [ "$1" = "config" ]; then
+		echo "graph_title uWSGI Memory"
+		echo "graph_vlabel RAM"
+		echo "graph_category uWSGI"
+		echo "graph_args --base 1024"
+		echo "ram.label RAM"
+		exit 0
+	else
+		echo -n "ram.value "
+		ps u -p $(pidof uwsgi) | awk 'NR > 1 {nm += $5} END {print nm*1024}'
+		exit 0
+	fi
+fi
+exit 0
