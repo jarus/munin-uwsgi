@@ -6,6 +6,7 @@ mode=`echo $0 | cut -d _ -f 2`
 
 if [ "$1" = "suggest" ]; then
 	echo "memory"
+	echo "processes"
 	exit 0
 fi
 
@@ -20,6 +21,17 @@ if [ "$mode" = "memory" ]; then
 	else
 		echo -n "ram.value "
 		ps u -p $(pidof uwsgi) | awk 'NR > 1 {nm += $5} END {print nm*1024}'
+		exit 0
+	fi
+elif [ "$mode" = "processes" ]; then
+	if [ "$1" = "config" ]; then
+		echo "graph_title uWSGI Processes"
+		echo "graph_vlabel Processes"
+		echo "graph_category uWSGI"
+		echo "processes.label activ processes"
+	else
+		echo -n "processes.value "
+		ps -C uwsgi h | wc -l
 		exit 0
 	fi
 fi
