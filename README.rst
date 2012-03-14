@@ -3,6 +3,13 @@ munin-uwsgi
 
 Is a plugin for the monitoring software `munin <http://http://munin-monitoring.org/>`_ to monitor `uWSGI <http://prosody.im>`_ processes. 
 
+Example
+-------
+
+.. image:: https://munin.thelabmill.de/thelabmill.de/server.thelabmill.de/uwsgi_memory-day.png
+
+.. image:: https://munin.thelabmill.de/thelabmill.de/server.thelabmill.de/uwsgi_processes-day.png
+
 Wildcard plugin
 ---------------
 
