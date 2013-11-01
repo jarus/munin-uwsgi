@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Copyright (c) 2011 Christoph Heer (Christoph.Heer@googlemail.com)
 # License: BSD, see LICENSE for more details.
 
@@ -20,7 +20,7 @@ if [ "$mode" = "memory" ]; then
 		exit 0
 	else
 		echo -n "ram.value "
-		ps u -p $(pidof uwsgi uwsgi-core) | awk 'NR > 1 {nm += $5} END {print nm*1024}'
+		ps u -p $(pgrep uwsgi) | awk 'NR > 1 {nm += $5} END {print nm*1024}'
 		exit 0
 	fi
 elif [ "$mode" = "processes" ]; then
@@ -31,7 +31,7 @@ elif [ "$mode" = "processes" ]; then
 		echo "processes.label activ processes"
 	else
 		echo -n "processes.value "
-		ps -C 'uwsgi uwsgi-core' h | wc -l
+		pgrep uwsgi | wc -l
 		exit 0
 	fi
 fi
